@@ -42,4 +42,45 @@ router.post("/", [//Validações
     }
 })
 
+router.put("/updateprofessional", async (req, res) => {
+    //Atualiza o Profisssional
+    try{
+        await db.updateProfessional(req.body);
+        res.status(201).send({message: "Profissional atualizado corretamente"});
+        console.log(req.body)
+    }catch{
+        res.status(500).send({message: `Internal Error Server`})
+    }
+})
+
+router.delete("/disableprofessional", async (req, res) => {
+    //Atualiza o Profisssional
+    try{
+        await db.disalbeProfessional(req.body);
+        res.status(201).send({message: "Profissional desativado corretamente"});
+    }catch{
+        res.status(500).send({message: `Internal Error Server`})
+    }
+})
+
+router.get("/professional", async (req, res) => {
+    //Atualiza o Profisssional
+    try{
+        const found = await db.foundProfessional(req.body);
+        res.status(201).send({message: found});
+    }catch{
+        res.status(500).send({message: `Internal Error Server`})
+    }
+})
+
+router.get("/allprofessional", async (req, res) => {
+    //Atualiza o Profisssional
+    try{
+        const found = await db.foundAllProfessional();
+        res.status(201).send({message: found});
+    }catch{
+        res.status(500).send({message: `Internal Error Server`})
+    }
+})
+
 export default router;
