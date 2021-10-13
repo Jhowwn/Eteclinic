@@ -21,9 +21,9 @@ async function insertCliente({zipCode, streat, number, district, city, uf, cpf, 
     conn.end();
 }
 
-async function updateClient({id, cpf, name, phone, cellPhone, email, typeBlood}){
+async function updateClient({zipCode, streat, number, district, city, uf,id, cpf, name, phone, cellPhone, email, typeBlood}){
     const conn = await database.connect();
-    const sql = "call sp_update_cliente(?,?,?,?,?,?,?)";
+    const sql = "call sp_update_cliente(?,?,?,?,?,?,?,?,?,?,?,?,?)";
     const updateClientData=[
         id,
         cpf,
@@ -31,7 +31,13 @@ async function updateClient({id, cpf, name, phone, cellPhone, email, typeBlood})
         phone,
         cellPhone,
         email,
-        typeBlood
+        typeBlood,
+        zipCode, 
+        streat, 
+        number,
+        district,
+        city,
+        uf
     ]
     conn.query(sql, updateClientData);
     conn.end();

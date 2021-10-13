@@ -51,7 +51,7 @@ router.post("/",[//Validações
 })
 
 router.post("/update", async (req, res) =>{
-    //Cadastra um cliente
+    //Atualiza o cliente
     
     try{
         await db.updateClient(req.body);

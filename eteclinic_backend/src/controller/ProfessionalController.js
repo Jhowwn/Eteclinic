@@ -54,7 +54,7 @@ router.put("/updateprofessional", async (req, res) => {
 })
 
 router.delete("/disableprofessional", async (req, res) => {
-    //Atualiza o Profisssional
+    //Desativa o Profisssional
     try{
         await db.disalbeProfessional(req.body);
         res.status(201).send({message: "Profissional desativado corretamente"});
@@ -64,7 +64,7 @@ router.delete("/disableprofessional", async (req, res) => {
 })
 
 router.get("/professional", async (req, res) => {
-    //Atualiza o Profisssional
+    //Busca um Profisssional
     try{
         const found = await db.foundProfessional(req.body);
         res.status(201).send({message: found});
@@ -74,7 +74,7 @@ router.get("/professional", async (req, res) => {
 })
 
 router.get("/allprofessional", async (req, res) => {
-    //Atualiza o Profisssional
+    //Busca todos Profisssionais
     try{
         const found = await db.foundAllProfessional();
         res.status(201).send({message: found});

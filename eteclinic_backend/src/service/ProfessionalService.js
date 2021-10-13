@@ -21,9 +21,9 @@ async function insertProfessional({zipCode, streat, number, district, city, uf, 
     conn.end();
 }
 
-async function updateProfessional({register, name, phone, cellPhone, email, profession, id}){
+async function updateProfessional({zipCode, streat, number, district, city, uf, register, name, phone, cellPhone, email, profession, id}){
     const conn = await database.connect();
-    const sql = 'call sp_update_especialistas(?,?,?,?,?,?,?)';
+    const sql = 'call sp_update_especialistas(?,?,?,?,?,?,?,?,?,?,?,?,?)';
     const newProfessional = [
         id,
         register, 
@@ -31,7 +31,13 @@ async function updateProfessional({register, name, phone, cellPhone, email, prof
         phone, 
         cellPhone, 
         email, 
-        profession
+        profession,
+        zipCode, 
+        streat, 
+        number, 
+        district, 
+        city, 
+        uf
     ]
     conn.query(sql, newProfessional);
     conn.end();
