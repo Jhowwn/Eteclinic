@@ -44,13 +44,25 @@ router.put('/update', async (req, res) => {
     }
 });
 
-router.delete('/delete', async (req, res) => {
+router.delete('/delete/:id', async (req, res) => {
+    const id = req.params.id;
+    
     try{
-        await db.disableUser(req.body);
+        await db.disableUser(id);
         res.status(201).send({mensage:'usuario desativado com sucesso'});
     }catch{
         res.status(500).send({mensage:`Erro ao desativar o usuário. ${err}`});
     }
 });
+
+router.get("/getUser/:id", async (req, res) => {
+    const id = req.params.id;
+    try{
+        const found = await db.findUser(id);
+        res.status(201).send({message: found});
+    }catch{
+        res.status(500).send({message: 'Internal error server'})
+    }
+})
 
 export default router;

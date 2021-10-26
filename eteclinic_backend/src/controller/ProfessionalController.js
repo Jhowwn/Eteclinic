@@ -53,20 +53,22 @@ router.put("/updateprofessional", async (req, res) => {
     }
 })
 
-router.delete("/disableprofessional", async (req, res) => {
+router.delete("/disableprofessional/:id", async (req, res) => {
     //Desativa o Profisssional
+    const id = req.params.id;
     try{
-        await db.disalbeProfessional(req.body);
+        await db.disalbeProfessional(id);
         res.status(201).send({message: "Profissional desativado corretamente"});
     }catch{
         res.status(500).send({message: `Internal Error Server`})
     }
 })
 
-router.get("/professional", async (req, res) => {
+router.get("/professional/:id", async (req, res) => {
     //Busca um Profisssional
+    const id = req.params.id;
     try{
-        const found = await db.foundProfessional(req.body);
+        const found = await db.foundProfessional(id);
         res.status(201).send({message: found});
     }catch{
         res.status(500).send({message: `Internal Error Server`})

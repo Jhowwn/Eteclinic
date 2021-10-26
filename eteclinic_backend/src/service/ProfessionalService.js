@@ -43,14 +43,15 @@ async function updateProfessional({zipCode, streat, number, district, city, uf, 
     conn.end();
 }
 
-async function disalbeProfessional({id}){
+async function disalbeProfessional(id){
     const conn = await database.connect();
     const sql = `update tbl_especialistas set especialista_deletado = 1 where id_especialista = ${id}`;
     conn.query(sql);
     conn.end();
 }
 
-async function foundProfessional({id}){
+async function foundProfessional(id){
+    console.log(id)
     const conn = await database.connect();
     const sql = `select * from tbl_especialistas where id_especialista = ${id}`
     const [rows] = await conn.query(sql);

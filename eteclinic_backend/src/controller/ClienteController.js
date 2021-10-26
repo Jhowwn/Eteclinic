@@ -52,13 +52,32 @@ router.post("/",[//Validações
 
 router.post("/update", async (req, res) =>{
     //Atualiza o cliente
-    
     try{
         await db.updateClient(req.body);
         res.status(201).send({message:'Update feito corretamente'});
         console.log(req.body)
     }catch{
         res.status(500).send({message: `Internal Error Server`})
+    }
+})
+
+router.delete("/diasableClinte/:id", async (req, res) => {
+    const id = req.params.id;
+    try{
+        await db.disableClient(id);
+        res.status(201).send({message: 'Cliente desativado com sucesso'});
+    }catch{
+        res.status(500).send({message: 'Internal error server'})
+    }
+})
+
+router.get("/getCliente/:id", async (req, res) => {
+    const id = req.params.id;
+    try{
+        const found = await db.findClient(id);
+        res.status(201).send({message: found});
+    }catch{
+        res.status(500).send({message: 'Internal error server'})
     }
 })
 

@@ -38,34 +38,22 @@ router.put('/update', [//Valida campo
     }
 });
 
-router.delete('/delete', [//Valida campo
-    body('id').isNumeric().withMessage('Id deve conter apenas numeros'),
-    body('id').isLength({min: 1}).withMessage('Id deve conter ao menos 1 numero')
-], async (req, res) =>{
-    const errors = validationResult(req);
+router.delete('/delete/:id', async (req, res) =>{
+    const id = req.params.id;
 
-    if(!errors.isEmpty()){
-        return res.status(400).send({errors: errors.array()});
-    }
     try{
-        await db.disalbeProfession(req.body);
+        await db.disalbeProfession(id);
         res.status(201).send({message: 'Profissão Desativada com sucesso'})
     }catch{
         res.status(500).send({mensage:`Internal Error Server`});
     }
 });
 
-router.get('/profession', [//Valida campo
-    body('id').isNumeric().withMessage('Id deve conter apenas numeros'),
-    body('id').isLength({min: 1}).withMessage('Id deve conter ao menos 1 numero')
-], async (req, res) =>{
-    const errors = validationResult(req);
-
-    if(!errors.isEmpty()){
-        return res.status(400).send({errors: errors.array()});
-    }
+router.get('/profession/:id',  async (req, res) =>{
+    const id = req.params.id;
+    
     try{
-        const data = await db.foundProfession(req.body);
+        const data = await db.foundProfession(id);
         res.status(201).send({data})
     }catch{
         res.status(500).send({mensage:`Internal Error Server`});

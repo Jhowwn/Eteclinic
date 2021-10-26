@@ -16,14 +16,14 @@ async function updateProfession({name, id}){
     conn.end();
 }
 
-async function disalbeProfession({id}){
+async function disalbeProfession(id){
     const conn = await database.connect();
     const sql = `update tbl_profissoes set profissao_deletada = 1 where id_profissao = ${id}`;
     conn.query(sql);
     conn.end();
 }
 
-async function foundProfession({id}){
+async function foundProfession(id){
     const conn = await database.connect();
     const sql = `select * from tbl_profissoes where id_profissao = ${id}`;
     const [rows] = await conn.query(sql);
